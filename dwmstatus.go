@@ -58,7 +58,7 @@ func getWeather() (s string) {
 }
 
 func getDate() (s string) {
-	t := time.Now().Format("Jan _2 15:04")
+	t := time.Now().Format("Mon Jan _2 15:04")
 	return strings.TrimSpace(fmt.Sprintf("%s", t))
 }
 
