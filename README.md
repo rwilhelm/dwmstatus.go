@@ -2,6 +2,8 @@
 dwmstatus.go
 ============
 
+![Screenshot](http://github.com/rwilhelm/dwmstatus.go/raw/master/screenshot.png)
+
 Outputs cpu usage, mem usage, weather and date. For now it can be used by e.g.
 
     dwmstatus | while read -r; do xsetroot -name "$REPLY"; done &
@@ -30,3 +32,8 @@ Todo
 
 * Implement some more status outputs (battery, GMail).
 * Make single status outputs optional.
+
+Credits
+-------
+
+* cornu (https://github.com/Cornu/dwmstatus)
