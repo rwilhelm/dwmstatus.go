@@ -3,9 +3,11 @@ dwmstatus.go
 ============
 
 
-Outputs cpu usage, mem usage, weather and date. For now it can be used by e.g.
+Outputs cpu usage, mem usage, weather and date.
 
     dwmstatus | while read -r; do xsetroot -name "$REPLY"; done &
+
+### Sample Output
 
 	 1 | 15 | 2.3 Fog | Wed Nov 14 13:37
 
@@ -20,7 +22,7 @@ To let dwmstatus not query wunderground.com every two seconds, a cronjob can be 
 
 	SHELL=/bin/zsh
 
-	*/10 * * * * < =(wu -astro) | awk '/Temperature/{gsub("[(]","",$4); t=$4}; \
+	*/10 * * * * < =(wu -conditions) | awk '/Temperature/{gsub("[(]","",$4); t=$4}; \
 	/Conditions/{c=($3 " " $4)}END{print t,c}' > /tmp/wucond.txt
 
 	0    0 * * * < =(wu -astro) | awk '/Sunrise/{r=$3}; \
