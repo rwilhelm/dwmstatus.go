@@ -39,9 +39,9 @@ func getMem() (mem int64) {
 		panic(fmt.Sprintf("Error opening /proc/meminfo", err))
 	}
 
-	var total, free, buf, cache, used int64
+	var total, free, avail, buf, cache, used int64
 
-	_, err = fmt.Sscanf(string(b), "MemTotal: %d kB\nMemFree: %d kB\nBuffers: %d kB\nCached: %d kB\n", &total, &free, &buf, &cache)
+	_, err = fmt.Sscanf(string(b), "MemTotal: %d kB\nMemFree: %d kB\nMemAvailable: %d kB\nBuffers: %d kB\nCached: %d kB\n", &total, &free, &avail, &buf, &cache)
 	if err != nil {
 		panic(fmt.Sprintf("Error scanning /proc/meminfo", err))
 	}
@@ -49,13 +49,13 @@ func getMem() (mem int64) {
 	return used
 }
 
-func getWeather() (s string) {
-	b, err := ioutil.ReadFile("/tmp/weather.txt")
-	if err != nil {
-		panic(fmt.Sprintf("Error opening /tmp/weather.txt", err))
-	}
-	return strings.TrimSpace(fmt.Sprintf("%s", b))
-}
+//func getWeather() (s string) {
+//	b, err := ioutil.ReadFile("/tmp/weather.txt")
+//	if err != nil {
+//		panic(fmt.Sprintf("Error opening /tmp/weather.txt", err))
+//	}
+//	return strings.TrimSpace(fmt.Sprintf("%s", b))
+//}
 
 func getDate() (s string) {
 	t := time.Now().Format("Mon Jan _2 15:04")
@@ -66,9 +66,10 @@ func main() {
 	for {
 		m := getMem()
 		c := getCpu()
-		w := getWeather()
+		//w := getWeather()
 		t := getDate()
-		fmt.Printf("%2d | %2d | %s | %s\n", c, m, w, t)
+		t = strings.Replace(t, "  ", " ", -1)
+		fmt.Printf("cpu:%2d | mem:%2d | %s\n", c, m, t)
 		time.Sleep(2 * 1e9)
 	}
 }

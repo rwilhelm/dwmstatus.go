@@ -1,7 +1,6 @@
 
-dwmstatus.go
-============
-
+dwmstatus
+=========
 
 Outputs cpu usage, mem usage, weather and date.
 
